@@ -24,11 +24,9 @@ hs_err_pid*
 replay_pid*
 
 # 忽略这些数据的更新
-.idea
-.mvn
-**/.mvn
-**/mvnw.cmd
-**/mvnw
+.idea/
+*/.mvn/
+*/mvnw.cmd
+*/mvnw
 
-**/target
-/.idea/
+*/target/
