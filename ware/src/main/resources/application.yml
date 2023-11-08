@@ -20,3 +20,7 @@ mybatis-plus:
     db-config:
       # 自增主键
       id-type: auto
+
+server:
+  # ware 8085
+  port: 8085

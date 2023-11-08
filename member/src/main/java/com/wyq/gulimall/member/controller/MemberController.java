@@ -3,6 +3,7 @@ package com.wyq.gulimall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.wyq.gulimall.member.feign.CouponFeignService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,18 @@ import com.wyq.gulimall.common.utils.R;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private CouponFeignService couponFeignService;
+
+    @RequestMapping("coupons")
+    // 测试OpenFeign
+    public R test(){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setNickname("张三");
+        R coupons = couponFeignService.memberCoupons();
+        return R.ok().put("member", memberEntity).put("coupons", coupons.get("coupons"));
+    }
 
     /**
      * 列表

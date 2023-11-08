@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,7 @@ import com.wyq.gulimall.common.utils.R;
  * @email zhuwe0111@163.com
  * @date 2023-11-07 23:20:51
  */
+@RefreshScope // 动态刷新
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
@@ -43,6 +46,24 @@ public class CouponController {
     }
 
 
+    // 测试openFeign
+    @RequestMapping("member/list")
+    public R memberCoupons(){
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满一百减十");
+        return R.ok().put("coupons", Arrays.asList(couponEntity));
+    }
+
+
+    @Value("${coupon.user.name}")
+    private String Name;
+    @Value("${coupon.user.age}")
+    private Integer Age;
+    // 测试配置中心
+    @RequestMapping("/test/nacosconfig")
+    public R testNacosConfig(){
+        return R.ok().put("name", Name).put("age", Age);
+    }
     /**
      * 信息
      */

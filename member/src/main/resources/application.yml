@@ -20,3 +20,8 @@ mybatis-plus:
     db-config:
       # 自增主键
       id-type: auto
+
+
+server:
+  # member port 8082
+  port: 8082
