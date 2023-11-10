@@ -13,6 +13,14 @@ spring:
           uri: https://www.qq.com
           predicates:
             - Query=url,qq
+        - id: admin_route
+          # uri: lb://renren-fast # 负载均衡到，但是由于版本不对应暂时采用端口的方式进行访问
+          uri: http://localhost:8080
+          predicates: ## 前端默认都带有/api前缀
+            - Path=/api/**
+          filters: ## 路径重写
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+
   application:
     name: guli-gateway
 server:

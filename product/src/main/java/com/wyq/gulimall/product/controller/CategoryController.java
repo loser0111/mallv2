@@ -1,6 +1,7 @@
 package com.wyq.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -30,6 +31,20 @@ import com.wyq.gulimall.common.utils.R;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+    /**
+     * 查询所有分类和子分类，并以树形结构进行组装起来
+     *
+     * @return
+     */
+    @RequestMapping("/list/tree")
+    // @RequiresPermissions("product:category:list")
+    public R listTree(){
+        // 查询到所有的分类
+        List<CategoryEntity> entityList =  categoryService.listWithTree();
+
+        return R.ok().put("data", entityList);
+    }
 
     /**
      * 列表
